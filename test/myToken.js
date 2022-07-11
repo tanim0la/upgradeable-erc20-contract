@@ -14,11 +14,9 @@ beforeEach(async () => {
     compiledTokenV2.abi,
     compiledTokenV2.bytecode,
   )
-  //token = await myToken.deploy(1000)
+ 
   token = await upgrades.deployProxy(myToken, { kind: 'uups' })
   await token.deployed()
-
-  //await token.initialize()
 })
 
 describe('myToken', () => {
@@ -36,9 +34,6 @@ describe('myToken', () => {
 
     await tokenV2.burn(1000)
     const bal = (await tokenV2.balanceOf(tokenV2.address)).toString()
-    //console.log(bal)
-
-    //console.log(tokenV2.address)
 
     expect(bal).to.equal(ethers.utils.parseEther('0'))
   })
